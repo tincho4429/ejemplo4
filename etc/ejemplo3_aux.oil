@@ -1,0 +1,60 @@
+OSEK OSEK {
+
+   OS	ExampleOS {
+      STATUS = EXTENDED;
+      ERRORHOOK = FALSE;     /* cambio para que funciones*/
+      PRETASKHOOK = FALSE;  
+      POSTTASKHOOK = FALSE;
+      STARTUPHOOK = FALSE;
+      SHUTDOWNHOOK = FALSE;
+      USERESSCHEDULER = FALSE;
+      MEMMAP = FALSE;
+   };
+   
+   APPMODE = AppMode1;
+  
+ 	TASK TareaA {
+	PRIORITY = 1;
+	ACTIVATION = 1;
+	AUTOSTART = TRUE {
+	APPMODE = AppMode1;
+	}
+	STACK = 2048;
+	TYPE = BASIC;
+	SCHEDULE = FULL;     /* SINO NO PUEDE SER INTERRUMPIDA */
+	};
+	 
+	 
+	ALARM ActivateTaskA {
+   	COUNTER = HardwareCounter;
+  		 ACTION = ACTIVATETASK {
+  		 TASK = TareaA;
+   }
+   AUTOSTART = TRUE {
+      APPMODE = AppMode1;
+      ALARMTIME = 500;         /* inicio
+      CYCLETIME = 1000;         /* ciclo
+   };
+};
+	 
+	 COUNTER HardwareCounter {
+	 MAXALLOWEDVALUE = 1000;         /* Maximo valor del contador */
+	 TICKSPERBASE = 1;              /* No esta implementado (es un prescaler)
+	 MINCYCLE = 1;                  /* Ciclo minimo 
+	 TYPE = HARDWARE;               /* Usa un contador harwdare del micro
+	 COUNTER = HWCOUNTER0;          /* Usa el contador 0
+	 };
+	 
+	};
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	};
